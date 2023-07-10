@@ -1,4 +1,11 @@
 from django.db import models
 
 class Product(models.Model):
-    Ingredient = models.CharField(max_length=100)
+    id = models.CharField(max_length=255, unique=True)
+    product_name = models.CharField(max_length=255)
+    food_groups = models.CharField(max_length=255)
+    nutriscore = models.CharField(max_length=1)
+    allergens = models.TextField()
+    countries = models.CharField(max_length=255)
+    keywords = models.TextField()
+    ingredients_analysis_tags = models.TextField()
