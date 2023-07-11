@@ -15,6 +15,9 @@ def view_product(request, product_id):
             'food_groups' : product.food_groups,
             'nutriscore' : product.nutriscore,
             'allergens' : product.allergens,
+            'countries' : product.countries,
+            'keywords' : product.keywords,
+            'ingredients_analysis_tags' : product.ingredients_analysis_tags,
             }
         return render(request, 'search/index.html', context)
     

@@ -17,13 +17,14 @@ class Command(BaseCommand):
         for product in products:
             try:
                 new_prod = Product(
-                    id = product['_id'],
-                    product_name = product['product_name'],
-                    food_groups = product['food_groups'],
-                    nutriscore = product['nutriscore_grade'].upper(),
-                    allergens = product['allergens'],
-                    countries = product['countries'],
-                    keywords = product['_keywords'],
+                    id = product.get('_id'),
+                    product_name = product.get('product_name', ''),
+                    food_groups = product.get('food_groups', ''),
+                    nutriscore = product.get('nutriscore_grade', ''),
+                    allergens = product.get('allergens', ''),
+                    countries = product.get('countries', ''),
+                    keywords = product.get('_keywords', ''),
+                    ingredients_analysis_tags=product.get('ingredients_analysis_tags', ''),
                 )
                 new_prod.save()
             except Exception as e:

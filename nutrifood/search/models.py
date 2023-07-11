@@ -8,3 +8,4 @@ class Product(models.Model):
     allergens = models.TextField()
     countries = models.CharField(max_length=255)
     keywords = models.TextField()
+    ingredients_analysis_tags = models.TextField(default='')
