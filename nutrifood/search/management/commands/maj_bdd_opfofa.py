@@ -10,13 +10,12 @@ class Command(BaseCommand):
         parser.add_argument('category', nargs = '+', type = str)
         
     def handle(self, *args, **kwargs):
-        category = kwargs['category']
+        category = str(kwargs['category'])
         url = 'https://world.openfoodfacts.org/category/'+category+'/?page_size=100.json'
         r = requests.get(url)
-        
-        try:
-            products = json.loads(r.text)['products']
-            for product in products:
+        products = json.loads(r.text)['products']
+        for product in products:
+            try:
                 new_prod = Product(
                     id = product['_id'],
                     product_name = product['product_name'],
@@ -25,7 +24,7 @@ class Command(BaseCommand):
                     allergens = product['allergens'],
                     countries = product['countries'],
                     keywords = product['_keywords'],
-                    ingredients_analysis_tags = product['ingredients_analysis_tags'])
+                )
                 new_prod.save()
-        except:
-            pass
+            except Exception as e:
+                print("An error occured, check your category please", str(e))
